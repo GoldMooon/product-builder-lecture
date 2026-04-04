@@ -1,18 +1,60 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로또 번호 추천기</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Lotto Number Generator</h1>
-        <button id="generate-btn">Generate Numbers</button>
-        <div id="number-display"></div>
-    </div>
-    <script src="main.js"></script>
+  <lotto-generator>
+    <main class="card">
+      <h1>로또 번호 추천기</h1>
+      <p class="subtitle">
+        원하는 만큼 추천 세트를 선택하고, 보너스 번호 포함 여부도 옵션으로 정할 수 있습니다.
+      </p>
+
+      <section class="controls" aria-label="추천 옵션">
+        <div class="control-group">
+          <label for="setCount">추천 세트 수</label>
+          <select id="setCount">
+            <option value="1">1개</option>
+            <option value="2">2개</option>
+            <option value="3">3개</option>
+            <option value="4">4개</option>
+            <option value="5" selected>5개</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="includeBonus">보너스 번호</label>
+          <div class="checkbox-row">
+            <input type="checkbox" id="includeBonus" />
+            <span>보너스 번호 포함</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="button-wrap">
+        <button id="pickBtn">번호 추천받기</button>
+      </div>
+
+      <section id="resultGrid" class="result-grid" aria-label="추천 번호 결과"></section>
+
+      <section class="info">
+        <strong>안내</strong><br />
+        각 세트는 1부터 45까지 중복 없이 6개 번호를 뽑습니다. 보너스 번호를 선택하면 본 번호와 겹치지 않는 번호 1개가 추가됩니다.
+      </section>
+
+      <section class="history">
+        <h2>최근 추천 기록</h2>
+        <ul id="historyList" class="history-list">
+          <li class="empty-text">아직 추천 기록이 없습니다.</li>
+        </ul>
+      </section>
+    </main>
+  </lotto-generator>
+
+  <script src="main.js"></script>
 </body>
 </html>
