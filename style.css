@@ -1,1 +1,43 @@
-/* Add styles here */
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#generate-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#generate-btn:hover {
+    background-color: #0056b3;
+}
+
+#number-display {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+lotto-ball {
+    margin: 0 5px;
+}
