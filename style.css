@@ -164,10 +164,37 @@ button:active {
   margin-top: 24px;
 }
 
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
 .history h2 {
   font-size: 1rem;
-  margin: 0 0 12px;
+  margin: 0;
   color: #111827;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.clear-btn:hover {
+  background: #f1f5f9;
+  color: #ef4444;
+  transform: none;
+  box-shadow: none;
 }
 
 .history-list {

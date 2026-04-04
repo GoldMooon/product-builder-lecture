@@ -107,6 +107,18 @@ class LottoGenerator extends HTMLElement {
         if (pickBtn) {
             pickBtn.addEventListener('click', () => this.pickNumbers());
         }
+        
+        const clearBtn = this.querySelector('#clearBtn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => this.clearHistory());
+        }
+    }
+
+    clearHistory() {
+        if (confirm('모든 추천 기록을 삭제하시겠습니까?')) {
+            this.history = [];
+            this.renderHistory();
+        }
     }
 
     generateMainNumbers() {
