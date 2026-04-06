@@ -34,6 +34,9 @@ This application is a modern, premium Lotto Number Recommendation Site built usi
 *   **Affiliate Inquiry Form:**
     *   Integrated a contact form for affiliate inquiries powered by Formspree.
     *   Styled to match the premium, modern aesthetic of the site.
+*   **Comments System:**
+    *   Integrated Disqus comment thread for user engagement.
+    *   Seamlessly blended into the main UI container.
 
 ## Next Steps
 

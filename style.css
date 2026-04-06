@@ -285,6 +285,17 @@ button:active {
   resize: vertical;
 }
 
+.comments {
+  margin-top: 24px;
+}
+
+.comments h2 {
+  font-size: 1.25rem;
+  margin: 0 0 20px;
+  color: #111827;
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   .card {
     padding: 24px 18px;
