@@ -247,6 +247,7 @@ class GenderClassifier extends HTMLElement {
         this.maxPredictions = 0;
         this.isStreaming = false;
         this.isModelLoading = false;
+        this.lastClass = ''; // To prevent flickering of reasons
     }
 
     connectedCallback() {
@@ -430,7 +431,12 @@ class GenderClassifier extends HTMLElement {
                 mainClass = p.className.toLowerCase();
             }
         }
-        this.updateReason(mainClass);
+        
+        // Update reason only when class changes to prevent flickering
+        if (mainClass !== this.lastClass) {
+            this.lastClass = mainClass;
+            this.updateReason(mainClass);
+        }
     }
 
     updateReason(className) {
@@ -549,7 +555,6 @@ class GenderClassifier extends HTMLElement {
             </div>
         `;
     }
-}
 }
 
 // Register Custom Elements
