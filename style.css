@@ -214,6 +214,17 @@ button:active {
   line-height: 1.6;
 }
 
+.ai-test {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.ai-test h2 {
+  font-size: 1.25rem;
+  margin: 0 0 10px;
+  color: #111827;
+}
+
 .empty-text {
   color: #64748b;
   font-weight: 500;

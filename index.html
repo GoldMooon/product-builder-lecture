@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>로또 번호 추천기</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
   <lotto-generator>
@@ -54,6 +56,14 @@
         <ul id="historyList" class="history-list">
           <li class="empty-text">아직 추천 기록이 없습니다.</li>
         </ul>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="ai-test">
+        <h2>AI 남녀 구분 테스트</h2>
+        <p class="subtitle">카메라를 통해 성별을 예측해 보세요. (AI 모델 사용)</p>
+        <gender-classifier></gender-classifier>
       </section>
 
       <hr class="divider" />

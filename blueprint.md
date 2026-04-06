@@ -34,6 +34,10 @@ This application is a modern, premium Lotto Number Recommendation Site built usi
 *   **Affiliate Inquiry Form:**
     *   Integrated a contact form for affiliate inquiries powered by Formspree.
     *   Styled to match the premium, modern aesthetic of the site.
+*   **AI Gender Classifier:**
+    *   Implemented a real-time AI test using Teachable Machine.
+    *   Features a live webcam feed and dynamic probability bars for gender prediction.
+    *   Integrated as a reusable Web Component with Shadow DOM encapsulation.
 *   **Comments System:**
     *   Integrated Disqus comment thread for user engagement.
     *   Seamlessly blended into the main UI container.
