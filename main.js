@@ -246,6 +246,7 @@ class GenderClassifier extends HTMLElement {
         this.webcam = null;
         this.maxPredictions = 0;
         this.isStreaming = false;
+        this.isModelLoading = false;
     }
 
     connectedCallback() {
@@ -254,28 +255,39 @@ class GenderClassifier extends HTMLElement {
     }
 
     setupEventListeners() {
-        this.shadowRoot.querySelector('#startBtn').addEventListener('click', () => this.initWebcam());
-        this.shadowRoot.querySelector('#uploadBtn').addEventListener('click', () => {
-            this.shadowRoot.querySelector('#fileInput').click();
-        });
-        this.shadowRoot.querySelector('#fileInput').addEventListener('change', (e) => this.handleFileUpload(e));
+        const startBtn = this.shadowRoot.querySelector('#startBtn');
+        const uploadBtn = this.shadowRoot.querySelector('#uploadBtn');
+        const fileInput = this.shadowRoot.querySelector('#fileInput');
+
+        if (startBtn) startBtn.addEventListener('click', () => this.initWebcam());
+        if (uploadBtn) uploadBtn.addEventListener('click', () => fileInput.click());
+        if (fileInput) fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
     }
 
     async loadModel() {
         if (this.model) return;
+        if (this.isModelLoading) return;
+        this.isModelLoading = true;
+        
         const URL = "https://teachablemachine.withgoogle.com/models/ZJ-iabh4p/";
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
-        this.model = await tmImage.load(modelURL, metadataURL);
-        this.maxPredictions = this.model.getTotalClasses();
+        
+        try {
+            this.model = await tmImage.load(modelURL, metadataURL);
+            this.maxPredictions = this.model.getTotalClasses();
+        } finally {
+            this.isModelLoading = false;
+        }
     }
 
     async initWebcam() {
         const startBtn = this.shadowRoot.querySelector('#startBtn');
         const uploadBtn = this.shadowRoot.querySelector('#uploadBtn');
+        
         startBtn.disabled = true;
         uploadBtn.disabled = true;
-        startBtn.textContent = '로딩 중...';
+        startBtn.textContent = '모델 로딩 중...';
 
         try {
             await this.loadModel();
@@ -315,9 +327,10 @@ class GenderClassifier extends HTMLElement {
 
         const uploadBtn = this.shadowRoot.querySelector('#uploadBtn');
         const startBtn = this.shadowRoot.querySelector('#startBtn');
+        
+        const originalBtnText = uploadBtn.textContent;
         uploadBtn.disabled = true;
         startBtn.disabled = true;
-        const originalText = uploadBtn.textContent;
         uploadBtn.textContent = '분석 중...';
 
         try {
@@ -330,7 +343,9 @@ class GenderClassifier extends HTMLElement {
                 img.onload = async () => {
                     this.isStreaming = false;
                     if (this.webcam) {
-                        await this.webcam.stop();
+                        try {
+                            await this.webcam.stop();
+                        } catch (e) {}
                     }
 
                     const container = this.shadowRoot.querySelector('#webcam-container');
@@ -361,7 +376,7 @@ class GenderClassifier extends HTMLElement {
             alert('이미지 분석 중 오류가 발생했습니다.');
             uploadBtn.disabled = false;
             startBtn.disabled = false;
-            uploadBtn.textContent = originalText;
+            uploadBtn.textContent = originalBtnText;
         }
     }
 
@@ -484,7 +499,6 @@ class GenderClassifier extends HTMLElement {
             </div>
         `;
     }
-}
 }
 
 // Register Custom Elements
