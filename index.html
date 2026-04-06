@@ -3,34 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>로또 번호 추천기</title>
+  <title>로또 번호 추천기 - 행운의 번호 및 AI 성별 분석기</title>
+  <meta name="description" content="고도의 무작위 추출 알고리즘과 최신 AI 기술을 결합한 로또 번호 추천기입니다. 행운의 번호를 생성하고 AI 성별 예측을 체험해 보세요." />
+  <meta name="keywords" content="로또번호추천, 로또번호생성기, AI성별예측, 인공지능테스트, 행운번호" />
+  
+  <!-- Structured Data (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "로또 번호 추천기",
+    "description": "무작위 번호 추출 및 AI 성별 분석 서비스를 제공하는 웹 애플리케이션",
+    "applicationCategory": "EntertainmentApplication",
+    "operatingSystem": "All"
+  }
+  </script>
+
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5953760232642607" crossorigin="anonymous"></script>
 </head>
 <body>
+  <header class="top-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">로또 추천기</a>
+      <nav>
+        <a href="about.html">소개</a>
+        <a href="privacy.html">개인정보 처리방침</a>
+        <a href="terms.html">이용약관</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ad-zone ad-top">
+    <div class="ad-placeholder">상단 광고 영역</div>
+  </div>
+
   <lotto-generator>
     <main class="card">
       <h1>로또 번호 추천기</h1>
       <p class="subtitle">
-        원하는 만큼 추천 세트를 선택하고, 보너스 번호 포함 여부도 옵션으로 정할 수 있습니다.
+        데이터 기반 알고리즘을 활용하여 당신만의 행운 번호 세트를 생성하세요.
       </p>
 
       <section class="controls" aria-label="추천 옵션">
         <div class="control-group">
           <label for="setCount">추천 세트 수</label>
           <select id="setCount">
-            <option value="1">1개</option>
-            <option value="2">2개</option>
-            <option value="3">3개</option>
-            <option value="4">4개</option>
-            <option value="5" selected>5개</option>
+            <option value="1">1개 세트</option>
+            <option value="2">2개 세트</option>
+            <option value="3">3개 세트</option>
+            <option value="4">4개 세트</option>
+            <option value="5" selected>5개 세트</option>
           </select>
         </div>
 
         <div class="control-group">
-          <label for="includeBonus">보너스 번호</label>
+          <label for="includeBonus">추가 옵션</label>
           <div class="checkbox-row">
             <input type="checkbox" id="includeBonus" />
             <span>보너스 번호 포함</span>
@@ -39,82 +69,94 @@
       </section>
 
       <div class="button-wrap">
-        <button id="pickBtn">번호 추천받기</button>
+        <button id="pickBtn">행운 번호 생성하기</button>
       </div>
 
       <section id="resultGrid" class="result-grid" aria-label="추천 번호 결과"></section>
 
-      <section class="info">
-        <strong>안내</strong><br />
-        각 세트는 1부터 45까지 중복 없이 6개 번호를 뽑습니다. 보너스 번호를 선택하면 본 번호와 겹치지 않는 번호 1개가 추가됩니다.
-      </section>
-
-      <section class="history">
-        <div class="history-header">
-          <h2>최근 추천 기록</h2>
-          <button id="clearBtn" class="clear-btn">기록 삭제</button>
+      <section class="faq-section">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+        <div class="faq-item">
+          <strong>Q: 생성된 번호로 당첨이 가능한가요?</strong>
+          <p>A: 본 사이트는 무작위 추출 알고리즘을 사용하며 실제 당첨 여부와는 무관합니다. 모든 결과는 확률에 기반하며 재미로만 참고하시길 바랍니다.</p>
         </div>
-        <ul id="historyList" class="history-list">
-          <li class="empty-text">아직 추천 기록이 없습니다.</li>
-        </ul>
+        <div class="faq-item">
+          <strong>Q: AI 성별 예측은 얼마나 정확한가요?</strong>
+          <p>A: Google의 Teachable Machine 모델을 활용하며, 학습 데이터에 따라 높은 정확도를 보이나 환경(조명, 각도)에 따라 오차가 발생할 수 있습니다.</p>
+        </div>
       </section>
 
-      <hr class="divider" />
+      <div class="ad-zone ad-mid">
+        <div class="ad-placeholder">중간 광고 영역</div>
+      </div>
+
+      <section class="info">
+        <h2>로또 알고리즘의 이해</h2>
+        <p>
+          로또 번호 추천기는 JavaScript의 고성능 무작위 생성기를 사용하여 1부터 45 사이의 숫자를 중복 없이 추출합니다. 
+          이는 실제 로또 추첨 기계의 원리를 시뮬레이션하며, 모든 숫자 조합은 이론적으로 동일한 발생 확률을 가집니다.
+        </p>
+        <p class="disclaimer" style="margin-top:20px; font-size:0.85rem; color:#ef4444; border:1px solid #fecaca; padding:15px; border-radius:12px; background:#fef2f2;">
+          <strong>법적 면책 조항:</strong> 본 사이트는 실제 복권 판매처가 아니며, 복권 구매를 권장하거나 당첨을 약속하지 않습니다. 
+          과도한 복권 구매는 도박 중독으로 이어질 수 있으니 주의하시기 바랍니다.
+        </p>
+      </section>
 
       <section class="ai-test">
-        <h2>AI 남녀 구분 테스트</h2>
-        <p class="subtitle">카메라를 통해 성별을 예측해 보세요. (AI 모델 사용)</p>
+        <h2>실시간 AI 성별 진단</h2>
+        <p class="subtitle">브라우저 기반 딥러닝 기술을 통한 지능형 성별 분석 서비스</p>
         <gender-classifier></gender-classifier>
       </section>
 
       <hr class="divider" />
 
       <section class="contact">
-        <h2>제휴 문의</h2>
-        <p class="contact-desc">제휴 제안이나 궁금한 점이 있다면 아래 폼을 통해 문의해 주세요.</p>
+        <h2>사용자 지원 및 문의</h2>
+        <p class="contact-desc">기술 지원이나 개선 제안이 필요하시면 아래 양식을 작성해 주세요.</p>
         <form action="https://formspree.io/f/mjgpjlwz" method="POST" class="contact-form">
           <div class="form-group">
-            <label for="name">성함</label>
-            <input type="text" id="name" name="name" placeholder="성함을 입력해 주세요" required />
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required />
           </div>
           <div class="form-group">
             <label for="email">이메일</label>
-            <input type="email" id="email" name="_replyto" placeholder="답변받을 이메일 주소" required />
+            <input type="email" id="email" name="_replyto" placeholder="답변을 받을 이메일 주소" required />
           </div>
           <div class="form-group">
-            <label for="message">문의 내용</label>
-            <textarea id="message" name="message" rows="4" placeholder="문의 내용을 상세히 적어 주세요" required></textarea>
+            <label for="message">문의 사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="상세 내용을 입력하세요" required></textarea>
           </div>
           <div class="button-wrap">
-            <button type="submit">문의 보내기</button>
+            <button type="submit">전송하기</button>
           </div>
         </form>
       </section>
 
-      <hr class="divider" />
-
       <section class="comments">
-        <h2>사용자 댓글</h2>
+        <h2>커뮤니티 광장</h2>
         <div id="disqus_thread"></div>
         <script>
-            /**
-            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
+            (function() {
             var d = document, s = d.createElement('script');
             s.src = 'https://week-17.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
       </section>
+
+      <div class="ad-zone ad-bottom">
+        <div class="ad-placeholder">하단 광고 영역</div>
+      </div>
+
+      <footer class="main-footer">
+        <p>&copy; 2026 로또 번호 추천기. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="about.html">소개</a>
+          <a href="privacy.html">개인정보 처리방침</a>
+          <a href="terms.html">이용약관</a>
+        </div>
+      </footer>
     </main>
   </lotto-generator>
 
