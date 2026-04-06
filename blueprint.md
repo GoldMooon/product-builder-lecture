@@ -31,6 +31,9 @@ This application is a modern, premium Lotto Number Recommendation Site built usi
     *   Modern UI/UX with glassmorphism and premium animations.
     *   Advanced logic for multiple sets, bonus numbers, and session history.
     *   **History Clearing:** Users can now delete all session records via the "기록 삭제" button.
+*   **Affiliate Inquiry Form:**
+    *   Integrated a contact form for affiliate inquiries powered by Formspree.
+    *   Styled to match the premium, modern aesthetic of the site.
 
 ## Next Steps
 
