@@ -42,6 +42,9 @@ This application is a modern, premium Lotto Number Recommendation Site built usi
 *   **Comments System:**
     *   Integrated Disqus comment thread for user engagement.
     *   Seamlessly blended into the main UI container.
+*   **Monetization:**
+    *   Integrated Google AdSense for site monetization.
+    *   Added `ads.txt` for publisher verification.
 
 ## Next Steps
 
