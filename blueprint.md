@@ -36,7 +36,8 @@ This application is a modern, premium Lotto Number Recommendation Site built usi
     *   Styled to match the premium, modern aesthetic of the site.
 *   **AI Gender Classifier:**
     *   Implemented a real-time AI test using Teachable Machine.
-    *   Features a live webcam feed and dynamic probability bars for gender prediction.
+    *   **Dual Mode:** Supports both live webcam feed and local image file uploads.
+    *   Features dynamic probability bars that automatically adapt to model classes.
     *   Integrated as a reusable Web Component with Shadow DOM encapsulation.
 *   **Comments System:**
     *   Integrated Disqus comment thread for user engagement.
