@@ -382,7 +382,8 @@ class GenderClassifier extends HTMLElement {
 
     renderResultLabels() {
         const resultArea = this.shadowRoot.querySelector('.result-area');
-        resultArea.innerHTML = '';
+        resultArea.innerHTML = '<div id="results-bars"></div><div id="reason-text">AI가 관찰 중입니다...</div>';
+        const barsContainer = this.shadowRoot.querySelector('#results-bars');
         for (let i = 0; i < this.maxPredictions; i++) {
             const className = this.model.getClassLabels()[i];
             const item = document.createElement('div');
@@ -393,7 +394,7 @@ class GenderClassifier extends HTMLElement {
                     <div class="progress-bar" id="bar-${i}"></div>
                 </div>
             `;
-            resultArea.appendChild(item);
+            barsContainer.appendChild(item);
         }
     }
 
@@ -406,6 +407,9 @@ class GenderClassifier extends HTMLElement {
     }
 
     updateUI(prediction) {
+        let maxProb = -1;
+        let mainClass = '';
+
         for (let i = 0; i < this.maxPredictions; i++) {
             const p = prediction[i];
             const percentage = (p.probability * 100).toFixed(1);
@@ -420,7 +424,38 @@ class GenderClassifier extends HTMLElement {
                     ? 'linear-gradient(90deg, #3b82f6, #60a5fa)' 
                     : 'linear-gradient(90deg, #ec4899, #f472b6)';
             }
+
+            if (p.probability > maxProb) {
+                maxProb = p.probability;
+                mainClass = p.className.toLowerCase();
+            }
         }
+        this.updateReason(mainClass);
+    }
+
+    updateReason(className) {
+        const reasonEl = this.shadowRoot.querySelector('#reason-text');
+        if (!reasonEl) return;
+
+        const maleReasons = [
+            "강렬한 턱선에서 느껴지는 상남자의 향기!",
+            "태평양 같은 어깨(마음의 눈으로 봄)가 남성임을 증명하네요.",
+            "이목구비에서 뿜어져 나오는 듬직함이 AI를 감동시켰습니다.",
+            "관리 잘 된 구레나룻 혹은 그 기운이 남성적입니다!",
+            "포스 넘치는 표정이 '나 남자다'라고 외치고 있군요."
+        ];
+
+        const femaleReasons = [
+            "우아함이 모니터를 뚫고 나와서 여성으로 판독되었습니다.",
+            "섬세한 이목구비의 조화가 완벽한 여성의 모습이군요.",
+            "눈빛에서 느껴지는 스마트함과 미적 감각이 여성적입니다.",
+            "분위기 여신 강림! AI 알고리즘이 화사함에 눈이 멀 뻔했네요.",
+            "선을 넘는 아름다움이 여성임을 확신하게 합니다."
+        ];
+
+        const reasons = className === 'male' ? maleReasons : femaleReasons;
+        const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+        reasonEl.innerHTML = `<strong>AI 한줄 평:</strong> ${randomReason}`;
     }
 
     render() {
@@ -485,6 +520,21 @@ class GenderClassifier extends HTMLElement {
                     height: 100%; border-radius: 999px;
                     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 }
+                #reason-text {
+                    margin-top: 20px;
+                    padding: 12px 16px;
+                    background: #f8fafc;
+                    border-left: 4px solid #3b82f6;
+                    border-radius: 8px;
+                    font-size: 0.9rem;
+                    color: #475569;
+                    line-height: 1.5;
+                    animation: fadeIn 0.5s ease;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(5px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
             </style>
             <div class="container">
                 <div id="webcam-container">
@@ -499,6 +549,7 @@ class GenderClassifier extends HTMLElement {
             </div>
         `;
     }
+}
 }
 
 // Register Custom Elements
